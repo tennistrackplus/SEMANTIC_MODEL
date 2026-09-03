@@ -65,6 +65,11 @@ view: centro_coste {
     sql: ${TABLE}.NIVEL2 ;;
   }
 
+  # Jerarquía "CECOS":
+  #   1. NIVEL1
+  #   2. NIVEL2
+  #   3. CENTRO_COSTE
+
 }
 
 view: cuenta {
