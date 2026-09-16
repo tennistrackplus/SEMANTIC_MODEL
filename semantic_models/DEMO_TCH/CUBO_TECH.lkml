@@ -32,6 +32,22 @@ view: epigrafe {
 
 }
 
+view: escenario_corpo {
+  sql_table_name: `draco-506807.DRACO_DEMO_TCH.DRACO_ESCENARIO_CORPO` ;;
+
+  dimension: escenario_corpo {
+    primary_key: yes
+    # tipo de origen: STRING
+    sql: ${TABLE}.ESCENARIO_CORPO ;;
+  }
+
+  dimension: textos {
+    # tipo de origen: STRING
+    sql: ${TABLE}.TEXTOS ;;
+  }
+
+}
+
 view: escenario_tech {
   sql_table_name: `draco-506807.DRACO_DEMO_TCH.DRACO_ESCENARIO_TECH` ;;
 
@@ -49,22 +65,6 @@ view: escenario_tech {
   dimension: texto {
     # tipo de origen: STRING
     sql: ${TABLE}.TEXTO ;;
-  }
-
-}
-
-view: escenario_corpo {
-  sql_table_name: `draco-506807.DRACO_DEMO_TCH.DRACO_ESCENARIO_CORPO` ;;
-
-  dimension: escenario_corpo {
-    primary_key: yes
-    # tipo de origen: STRING
-    sql: ${TABLE}.ESCENARIO_CORPO ;;
-  }
-
-  dimension: textos {
-    # tipo de origen: STRING
-    sql: ${TABLE}.TEXTOS ;;
   }
 
 }
@@ -194,13 +194,13 @@ explore: cubo_tech {
     relationship: many_to_one
   }
 
-  join: escenario_tech {
-    sql_on: ${cubo_tech_fact.ESCENARIO_TECH} = ${escenario_tech.ESCENARIO_TECH} ;;
+  join: escenario_corpo {
+    sql_on: ${cubo_tech_fact.ESCENARIO_CORPO} = ${escenario_corpo.ESCENARIO_CORPO} ;;
     relationship: many_to_one
   }
 
-  join: escenario_corpo {
-    sql_on: ${cubo_tech_fact.ESCENARIO_CORPO} = ${escenario_corpo.ESCENARIO_CORPO} ;;
+  join: escenario_tech {
+    sql_on: ${cubo_tech_fact.ESCENARIO_TECH} = ${escenario_tech.ESCENARIO_TECH} ;;
     relationship: many_to_one
   }
 
