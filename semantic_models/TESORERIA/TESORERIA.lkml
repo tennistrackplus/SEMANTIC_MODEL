@@ -49,20 +49,24 @@ view: tesoreria_fact {
     sql: ${TABLE}.PROJECT_DEFICIT ;;
   }
 
-}
-
-view: version {
-  sql_table_name: `draco-506807.DRACO_TESORERIA.DRACO_VERSION` ;;
-
-  dimension: version {
-    primary_key: yes
-    # tipo de origen: STRING
-    sql: ${TABLE}.VERSION ;;
+  measure: immediate {
+    type: sum
+    sql: ${TABLE}.IMMEDIATE ;;
   }
 
-  dimension: descripcion {
-    # tipo de origen: STRING
-    sql: ${TABLE}.DESCRIPCION ;;
+  measure: 30days {
+    type: sum
+    sql: ${TABLE}.N30DAYS ;;
+  }
+
+  measure: 60days {
+    type: sum
+    sql: ${TABLE}.N60DAYS ;;
+  }
+
+  measure: 90days {
+    type: sum
+    sql: ${TABLE}.N90DAYS ;;
   }
 
 }
@@ -100,6 +104,125 @@ view: account {
   #   1. NIVEL1
   #   2. NIVEL2
   #   3. ACCOUNT
+
+}
+
+view: bussines_line {
+  sql_table_name: `draco-506807.DRACO_TESORERIA.DRACO_BUSSINES_LINE` ;;
+
+  dimension: bussines_line {
+    primary_key: yes
+    # tipo de origen: STRING
+    sql: ${TABLE}.BUSSINES_LINE ;;
+  }
+
+  dimension: descripcion {
+    # tipo de origen: STRING
+    sql: ${TABLE}.DESCRIPCION ;;
+  }
+
+  dimension: investment_category {
+    # tipo de origen: STRING
+    sql: ${TABLE}.INVESTMENT_CATEGORY ;;
+  }
+
+}
+
+view: cash_flow_item {
+  sql_table_name: `draco-506807.DRACO_TESORERIA.DRACO_CASH_FLOW_ITEM` ;;
+
+  dimension: cash_flow_item {
+    primary_key: yes
+    # tipo de origen: STRING
+    sql: ${TABLE}.CASH_FLOW_ITEM ;;
+  }
+
+  dimension: descripcion {
+    # tipo de origen: STRING
+    sql: ${TABLE}.DESCRIPCION ;;
+  }
+
+  dimension: acivity {
+    # tipo de origen: STRING
+    sql: ${TABLE}.ACIVITY ;;
+  }
+
+  dimension: output_vat {
+    # tipo de origen: STRING
+    sql: ${TABLE}.OUTPUT_VAT ;;
+  }
+
+  dimension: input_vat {
+    # tipo de origen: STRING
+    sql: ${TABLE}.INPUT_VAT ;;
+  }
+
+  dimension: withholding_tax {
+    # tipo de origen: STRING
+    sql: ${TABLE}.WITHHOLDING_TAX ;;
+  }
+
+  dimension: social_security {
+    # tipo de origen: STRING
+    sql: ${TABLE}.SOCIAL_SECURITY ;;
+  }
+
+  dimension: nivel1 {
+    # tipo de origen: STRING
+    sql: ${TABLE}.NIVEL1 ;;
+  }
+
+  # Jerarquía "CFI_JER":
+  #   1. NIVEL1
+  #   2. CASH_FLOW_ITEM
+
+}
+
+view: company_code {
+  sql_table_name: `draco-506807.DRACO_TESORERIA.DRACO_COMPANY_CODE` ;;
+
+  dimension: company_code {
+    primary_key: yes
+    # tipo de origen: STRING
+    sql: ${TABLE}.COMPANY_CODE ;;
+  }
+
+  dimension: descripcion {
+    # tipo de origen: STRING
+    sql: ${TABLE}.DESCRIPCION ;;
+  }
+
+}
+
+view: cost_center {
+  sql_table_name: `draco-506807.DRACO_TESORERIA.DRACO_COST_CENTER` ;;
+
+  dimension: cost_center {
+    primary_key: yes
+    # tipo de origen: STRING
+    sql: ${TABLE}.COST_CENTER ;;
+  }
+
+  dimension: descripcion {
+    # tipo de origen: STRING
+    sql: ${TABLE}.DESCRIPCION ;;
+  }
+
+}
+
+view: currency {
+  sql_table_name: `draco-506807.DRACO_TESORERIA.DRACO_CURRENCY` ;;
+
+  dimension: currency {
+    primary_key: yes
+    # tipo de origen: STRING
+    sql: ${TABLE}.CURRENCY ;;
+  }
+
+  dimension: descripcion {
+    # tipo de origen: STRING
+    sql: ${TABLE}.DESCRIPCION ;;
+  }
 
 }
 
@@ -179,39 +302,18 @@ view: date {
 
 }
 
-view: company_code {
-  sql_table_name: `draco-506807.DRACO_TESORERIA.DRACO_COMPANY_CODE` ;;
+view: gl_account {
+  sql_table_name: `draco-506807.DRACO_TESORERIA.DRACO_GL_ACCOUNT` ;;
 
-  dimension: company_code {
+  dimension: gl_account {
     primary_key: yes
     # tipo de origen: STRING
-    sql: ${TABLE}.COMPANY_CODE ;;
+    sql: ${TABLE}.GL_ACCOUNT ;;
   }
 
   dimension: descripcion {
     # tipo de origen: STRING
     sql: ${TABLE}.DESCRIPCION ;;
-  }
-
-}
-
-view: bussines_line {
-  sql_table_name: `draco-506807.DRACO_TESORERIA.DRACO_BUSSINES_LINE` ;;
-
-  dimension: bussines_line {
-    primary_key: yes
-    # tipo de origen: STRING
-    sql: ${TABLE}.BUSSINES_LINE ;;
-  }
-
-  dimension: descripcion {
-    # tipo de origen: STRING
-    sql: ${TABLE}.DESCRIPCION ;;
-  }
-
-  dimension: investment_category {
-    # tipo de origen: STRING
-    sql: ${TABLE}.INVESTMENT_CATEGORY ;;
   }
 
 }
@@ -232,95 +334,13 @@ view: vendor_customer {
 
 }
 
-view: cost_center {
-  sql_table_name: `draco-506807.DRACO_TESORERIA.DRACO_COST_CENTER` ;;
+view: version {
+  sql_table_name: `draco-506807.DRACO_TESORERIA.DRACO_VERSION` ;;
 
-  dimension: cost_center {
+  dimension: version {
     primary_key: yes
     # tipo de origen: STRING
-    sql: ${TABLE}.COST_CENTER ;;
-  }
-
-  dimension: descripcion {
-    # tipo de origen: STRING
-    sql: ${TABLE}.DESCRIPCION ;;
-  }
-
-}
-
-view: cash_flow_item {
-  sql_table_name: `draco-506807.DRACO_TESORERIA.DRACO_CASH_FLOW_ITEM` ;;
-
-  dimension: cash_flow_item {
-    primary_key: yes
-    # tipo de origen: STRING
-    sql: ${TABLE}.CASH_FLOW_ITEM ;;
-  }
-
-  dimension: descripcion {
-    # tipo de origen: STRING
-    sql: ${TABLE}.DESCRIPCION ;;
-  }
-
-  dimension: acivity {
-    # tipo de origen: STRING
-    sql: ${TABLE}.ACIVITY ;;
-  }
-
-  dimension: output_vat {
-    # tipo de origen: STRING
-    sql: ${TABLE}.OUTPUT_VAT ;;
-  }
-
-  dimension: input_vat {
-    # tipo de origen: STRING
-    sql: ${TABLE}.INPUT_VAT ;;
-  }
-
-  dimension: withholding_tax {
-    # tipo de origen: STRING
-    sql: ${TABLE}.WITHHOLDING_TAX ;;
-  }
-
-  dimension: social_security {
-    # tipo de origen: STRING
-    sql: ${TABLE}.SOCIAL_SECURITY ;;
-  }
-
-  dimension: nivel1 {
-    # tipo de origen: STRING
-    sql: ${TABLE}.NIVEL1 ;;
-  }
-
-  # Jerarquía "CFI_JER":
-  #   1. NIVEL1
-  #   2. CASH_FLOW_ITEM
-
-}
-
-view: currency {
-  sql_table_name: `draco-506807.DRACO_TESORERIA.DRACO_CURRENCY` ;;
-
-  dimension: currency {
-    primary_key: yes
-    # tipo de origen: STRING
-    sql: ${TABLE}.CURRENCY ;;
-  }
-
-  dimension: descripcion {
-    # tipo de origen: STRING
-    sql: ${TABLE}.DESCRIPCION ;;
-  }
-
-}
-
-view: gl_account {
-  sql_table_name: `draco-506807.DRACO_TESORERIA.DRACO_GL_ACCOUNT` ;;
-
-  dimension: gl_account {
-    primary_key: yes
-    # tipo de origen: STRING
-    sql: ${TABLE}.GL_ACCOUNT ;;
+    sql: ${TABLE}.VERSION ;;
   }
 
   dimension: descripcion {
@@ -333,23 +353,8 @@ view: gl_account {
 explore: tesoreria {
   view_name: tesoreria_fact
 
-  join: version {
-    sql_on: ${tesoreria_fact.VERSION} = ${version.VERSION} ;;
-    relationship: many_to_one
-  }
-
   join: account {
     sql_on: ${tesoreria_fact.ACCOUNT} = ${account.ACCOUNT} ;;
-    relationship: many_to_one
-  }
-
-  join: date {
-    sql_on: ${tesoreria_fact.DATE} = ${date.DATE} ;;
-    relationship: many_to_one
-  }
-
-  join: company_code {
-    sql_on: ${tesoreria_fact.COMPANY_CODE} = ${company_code.COMPANY_CODE} ;;
     relationship: many_to_one
   }
 
@@ -358,8 +363,13 @@ explore: tesoreria {
     relationship: many_to_one
   }
 
-  join: vendor_customer {
-    sql_on: ${tesoreria_fact.VENDOR_CUSTOMER} = ${vendor_customer.VENDOR_CUSTOMER} ;;
+  join: cash_flow_item {
+    sql_on: ${tesoreria_fact.CASH_FLOW_ITEM} = ${cash_flow_item.CASH_FLOW_ITEM} ;;
+    relationship: many_to_one
+  }
+
+  join: company_code {
+    sql_on: ${tesoreria_fact.COMPANY_CODE} = ${company_code.COMPANY_CODE} ;;
     relationship: many_to_one
   }
 
@@ -368,18 +378,28 @@ explore: tesoreria {
     relationship: many_to_one
   }
 
-  join: cash_flow_item {
-    sql_on: ${tesoreria_fact.CASH_FLOW_ITEM} = ${cash_flow_item.CASH_FLOW_ITEM} ;;
-    relationship: many_to_one
-  }
-
   join: currency {
     sql_on: ${tesoreria_fact.CURRENCY} = ${currency.CURRENCY} ;;
     relationship: many_to_one
   }
 
+  join: date {
+    sql_on: ${tesoreria_fact.DATE} = ${date.DATE} ;;
+    relationship: many_to_one
+  }
+
   join: gl_account {
     sql_on: ${tesoreria_fact.GL_ACCOUNT} = ${gl_account.GL_ACCOUNT} ;;
+    relationship: many_to_one
+  }
+
+  join: vendor_customer {
+    sql_on: ${tesoreria_fact.VENDOR_CUSTOMER} = ${vendor_customer.VENDOR_CUSTOMER} ;;
+    relationship: many_to_one
+  }
+
+  join: version {
+    sql_on: ${tesoreria_fact.VERSION} = ${version.VERSION} ;;
     relationship: many_to_one
   }
 
